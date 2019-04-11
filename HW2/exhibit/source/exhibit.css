@@ -1,116 +1,274 @@
 
-.museum-name {
-	font-size: 30px;
-	padding-left: 55px;
+@media(max-width: 1300px) {
+	.museum-name {
+		background-color: lightblue;
+		font-size: 20px;
+		
+	}
+	.middle-museum-name {
+		background-color: yellow; 
+		color: rgb(201,82,61);
+		font-family: "montserrat", sans-serif;
+		font-weight: bold;
+		font-style: normal;
+	}
+	.nav-bar {
+		background-color: lightgray;
+		display: flex;
+		color: blue;
+		font-family: "montserrat", sans-serif;
+		font-weight: 200;
+		font-style: normal;
+		padding: 25px;
+		/* max-width: 1630px;*/
+		width: 90%;
+		margin: 0 auto;
+		justify-content: space-between;
+	}
 }
 
-.middle-museum-name {
-	/*background-color: yellow; DELETEME */
-	color: rgb(201,82,61);
-	font-family: "montserrat", sans-serif;
-	font-weight: bold;
-	font-style: normal;
-}
+@media(max-width: 2400px) and (min-width: 1300px) {
+	.museum-name {
+		font-size: 30px;
+		padding-left: 55px;
+	}
 
-.nav-bar {
-	/*background-color: lightgray;*/
-	display: flex;
-	color: blue;
-	font-family: "montserrat", sans-serif;
-	font-weight: 200;
-	font-style: normal;
-	padding: 55px;
-	/* max-width: 1630px;*/
-	width: 90%;
-	margin: 0 auto;
-	justify-content: space-between;
-}
+	.middle-museum-name {
+		/*background-color: yellow; DELETEME */
+		color: rgb(201,82,61);
+		font-family: "montserrat", sans-serif;
+		font-weight: bold;
+		font-style: normal;
+	}
 
-.top-nav {
-	background-color: white; /*DELETEME*/
-	color: black;
-	font-size: 30px;
-	display: flex;
-	margin: 0; /* align links to the museum name */
-	padding: 0;
-	padding-right: 60px;
-	list-style: None; /* takes away the bullet point */
-	text-decoration: None; /*   may not be necessary, but used to make sure links
-        	                        are the not underlined as well */
-}
+	.nav-bar {
+		/*background-color: lightgray;*/
+		display: flex;
+		color: blue;
+		font-family: "montserrat", sans-serif;
+		font-weight: 200;
+		font-style: normal;
+		padding: 55px;
+		/* max-width: 1630px;*/
+		width: 90%;
+		margin: 0 auto;
+		justify-content: space-between;
+	}
 
-.nav-link {
-	/*background-color: lightpink; DELETEME */
-	text-decoration: None; /* take away the underline for each link */
-	color: black;
-	font-weight: 200;
-	padding-right: 20px;
-	padding-left: 20px;
-}
+	.top-nav {
+		background-color: white; /*DELETEME*/
+		color: black;
+		font-size: 30px;
+		display: flex;
+		margin: 0; /* align links to the museum name */
+		padding: 0;
+		padding-right: 60px;
+		list-style: None; /* takes away the bullet point */
+		text-decoration: None; /*   may not be necessary, but used to make sure links
+	        	                        are the not underlined as well */
+	}
 
-.last-nav-link {
-	/*background-color: lightpink; DELETEME */
-	text-decoration: None; /* take away the underline for each link */
-	color: black;
-	font-weight: 200;
-	padding-left: 20px;
-}
+	.nav-link {
+		/*background-color: lightpink; DELETEME */
+		text-decoration: None; /* take away the underline for each link */
+		color: black;
+		font-weight: 200;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 
-header {
-	background-color: rgb(249,172,120);
-	display: flex;
-}
+	.last-nav-link {
+		/*background-color: lightpink; DELETEME */
+		text-decoration: None; /* take away the underline for each link */
+		color: black;
+		font-weight: 200;
+		padding-left: 20px;
+	}
+
+	header {
+		background-color: rgb(249,172,120);
+		display: flex;
+	}
 
 
-.corridor-install {
-	height: 360px;
-	width: 550px;
-	position: relative;
-	left: 150px;
-}
+	.corridor-install {
+		height: 360px;
+		width: 550px;
+		position: relative;
+		left: 150px;
+	}
 
-.corridor-author {
-	/*background-color: pink;*/
-	color: white;
-	position: relative;
-	left: 220px;
-	top: 50px;
-	width: 950px;
-	height: 200px;
-}
+	.corridor-author {
+		/*background-color: pink;*/
+		color: white;
+		position: relative;
+		left: 220px;
+		top: 50px;
+		width: 950px;
+		height: 200px;
+	}
 
-.author-description {
-	/*background-color: red;*/
-	display: flex;	
-	padding: 10px;
-}
+	.author-description {
+		/*background-color: red;*/
+		display: flex;	
+		padding: 10px;
+	}
 
-#author {
-	font-size: 120px;
-	font-weight: bold;
-	font-family: "montserrat", sans-serif;
-}
+	#author {
+		font-size: 120px;
+		font-weight: bold;
+		font-family: "montserrat", sans-serif;
+	}
 
-#corridor-color {
-	font-size: 74px;
-	font-weight: 200;
-	font-style: italic;
-	font-family: "montserrat", sans-serif;
-}
+	#corridor-color {
+		font-size: 74px;
+		font-weight: 200;
+		font-style: italic;
+		font-family: "montserrat", sans-serif;
+	}
 
-body {
-	min-height: 100vh;  /* needed to make sure body fills up window */
-	font-family: helvetica;
-}
+	body {
+		min-height: 100vh;  /* needed to make sure body fills up window */
+		font-family: helvetica;
+	}
 
-.p-title {
-	background-color: lightgray;
-	color: rgb(201,82,61);
-}
+	.p-title {
+		/*background-color: lightgray;*/
+		color: rgb(201,82,61);
+		font-size: 39px;
+		position: relative;
+		top: 10px;
+	}
 
-main {
-}
+	.extension-date {
+		font-weight: bold;
+		position: relative;
+		bottom: 12px;
+	}
 
-p {
-    background-color: lightblue;
+	.bruce-sketch {
+		/*background-color: lightblue;*/
+		display: flex;
+		padding: 50px;
+	}
+
+	.bruce-text {
+		/*background-color: orange;*/
+		width: 780px;
+		position: relative;
+		left: 100px;
+	}
+
+	.line {
+		color: black;
+	}
+
+	.sketch-img {
+		height: 530px;
+		width: 705px;
+		position: relative;
+		left: 170px;
+	}
+
+	.p1 {
+		position: relative;
+		top: 50px;
+	}
+
+	#readMoreButton {
+		font-size: 26px;
+		position: relative;
+		left: 150px;
+		bottom: 110px;
+	}
+
+	#readLessButton {
+		font-size: 26px;
+		position: relative;
+		left: 700px;
+		bottom: 35px;
+	}
+
+	.readButton {
+		background-color: white;
+		color: rgb(201,82,61);
+		border-style: none;
+		text-decoration: underline;
+	}
+
+	.readLess {
+		display: none;
+	}
+
+	.readMore {
+		display: inline;
+	}
+
+	.moreText {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.bruce-in-corridor {
+		float: left;
+		height: 700px;
+		width: 500px;
+		padding-right: 50px;
+		position: relative;
+		bottom: 45px;
+	}
+
+	.bottom-text {
+		width: 1520px;
+	}
+
+	#middleContent {
+		padding-left: 150px;
+	}
+
+	.p3 {
+		padding-top: 40px;
+	}
+
+	p {
+		/*background-color: lightgray;*/
+		font-size: 28px;
+		font-weight: 200;
+	}
+
+	.bottomWeb {
+		background-color: rgb(249,172,120);
+		color: rgb(201,82,61);
+		display: flex;
+		font-size: 29px;
+		justify-content: space-between;
+		padding: 80px;
+		position: relative;
+		top: 25px;
+	}
+
+	ul.address {
+		/*background-color: lightblue;*/
+		height: 200px;
+		width: 400px;
+		position: relative;
+		left: 70px;
+	}
+
+	ul.hours {
+		/*background-color: lightgray;*/
+		position: relative;
+		right: 470px;
+	}
+
+	li.title {
+		font-weight: bold;
+		position: relative;
+		bottom: 30px;
+	}
+
+	li.footer-content {
+		padding: 5px;
+		font-weight: 200;
+	}
 }
