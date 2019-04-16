@@ -1,0 +1,23 @@
+@media(min-width: 1500px){
+	.gradient {
+		height: 500px;
+		background-image: linear-gradient(rgb(73,138,220), rgb(98,59,156));
+	}
+
+	.weatherTitle {
+		position: relative;
+		top: 75px;
+		left: 125px;
+	}
+
+	.localName {
+		background-color: lightgray;
+		color: white;
+		font-size: 50px;
+	}
+
+	.doppler {
+		background-color: orange;
+		font-size: 35px;
+	}
+}
