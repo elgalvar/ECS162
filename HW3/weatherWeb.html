@@ -5,14 +5,84 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="reset.css">
 	<link rel="stylesheet" type="text/css" href="weatherWeb.css">
+	<link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,500" rel="stylesheet">
 	<title>Weather Webpage</title>
 </head>
 <body>
-	<div class="gradient">
-		<ul class="weatherTitle">
-			<li class="localName">Local Weather Six Hour Forecast</li>
-			<li class="doppler">Northern California with doppler radar</li>
-		</ul>
+	<div class="appear" id="gradient">
+		<div class="topText">
+			<ul class="weatherHeaders"> <!-- might not use class-->
+				<li><div class="localName"><p>Local Weather</p><p class="localHalf">Six Hour Forecast</p></div></li>
+				<li class="doppler">Northern California with doppler radar</li>
+			</ul>
+
+			<div class="searchContainer">
+				<p class="outerText">Forecast for</p>
+				<input type="text" placeholder="Davis,CA" class="searchBar">
+				<button type="Submit" class="submitButton">submit</button>
+			</div>
+
+			<div class="tempMap">
+				<div class="current">
+					<img src="assets/fewclouds-day.svg" alt="Image not found." class="weatherImg">
+					<div class="timeTemp">
+						<ul class="currentContent">
+							<li class="currentText">current</li>
+							<li class="currentTime">12PM</li>
+						</ul>
+						<hr class="line">
+						<div class="tempDegree">
+							<p class="temp">67</p>
+							<span class="degree">&#176</span>
+						</div>
+					</div>
+				</div>
+				<div class="map">
+					<img src="http://radar.weather.gov/ridge/Overlays/Topo/Short/DAX_Topo_Short.jpg" alt="Image not found." class="baseImg">
+					<img src="http://radar.weather.gov/ridge/Overlays/Cities/Short/DAX_City_Short.gif" alt="Image not found." class="cityNames">
+					<img src="https://radar.weather.gov/ridge/RadarImg/N0R/DAX_N0R_0.gif" alt="Image not found." class="radarImg">
+				</div>
+			</div>
+		</div>
+		<div class="button">
+			<button id="arrowUpClick" onclick="displayContent()">&#8963;</button>
+		</div>
 	</div>
+	<div class="disappear" id="weatherBlocks">
+		<div class="button">
+			<button id="arrowDownClick" onclick="displayContent()">&#8964;</button>
+		</div>
+		<div class="weatherBlock">
+			<p class="time">1:00 pm</p>
+			<img class="image" src="assets/scatteredclouds.svg" alt="Image does not exist.">
+			<p class="degrees">67&#176</p>
+		</div>
+		<hr class="bottomLine">
+		<div class="weatherBlock">
+			<p class="time">2:00 pm</p>
+			<img class="image" src="assets/showerrain.svg" alt="Image does not exist.">
+			<p class="degrees">68&#176</p>
+		</div>
+		<hr class="bottomLine">
+		<div class="weatherBlock">
+			<p class="time">3:00 pm</p>
+			<img class="image" src="assets/fewclouds-day.svg" alt="Image does not exist.">
+			<p class="degrees">70&#176</p>
+		</div>
+		<hr class="bottomLine">
+		<div class="weatherBlock">
+			<p class="time">4:00 pm</p>
+			<img class="image" src="assets/clearsky.svg" alt="Image does not exist.">
+			<p class="degrees">70&#176</p>
+		</div>
+		<hr class="bottomLine">
+		<div class="weatherBlock">
+			<p class="time">5:00 pm</p>
+			<img class="image" src="assets/clearsky.svg" alt="Image does not exist.">
+			<p class="degrees">71&#176</p>
+		</div>      
+	</div>
+	<script src="weatherWeb.js"></script>
 </body>
 </html>
