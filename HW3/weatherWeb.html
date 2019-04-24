@@ -25,15 +25,15 @@
 
 			<div class="tempMap">
 				<div class="current">
-					<img src="assets/fewclouds-day.svg" alt="Image not found." class="weatherImg">
+					<img src="assets/fewclouds-day.svg" alt="Image not found." class="weatherImg" id="currentImg">
 					<div class="timeTemp">
 						<ul class="currentContent">
 							<li class="currentText">current</li>
-							<li class="currentTime">12PM</li>
+							<li class="currentTime" id="currentTime">12PM</li>
 						</ul>
 						<hr class="line">
 						<div class="tempDegree">
-							<p class="temp">67</p>
+							<p class="temp" id="currentTemp">67</p>
 							<span class="degree">&#176</span>
 						</div>
 					</div>
@@ -54,33 +54,48 @@
 			<button id="arrowDownClick" onclick="displayContent()">&#8964;</button>
 		</div>
 		<div class="weatherBlock">
-			<p class="time">1:00 pm</p>
-			<img class="image" src="assets/scatteredclouds.svg" alt="Image does not exist.">
-			<p class="degrees">67&#176</p>
+			<p class="time" id="time1">1:00 pm</p>
+			<img class="image" src="assets/scatteredclouds.svg" alt="Image does not exist." id="weatherImg1">
+			<div class="tempDegree degrees">
+				<p id="weatherBlock1">67</p>
+				<span>&#176</span>
+			</div>
 		</div>
 		<hr class="bottomLine">
 		<div class="weatherBlock">
-			<p class="time">2:00 pm</p>
-			<img class="image" src="assets/showerrain.svg" alt="Image does not exist.">
-			<p class="degrees">68&#176</p>
+			<p class="time" id="time2">2:00 pm</p>
+			<img class="image" src="assets/showerrain.svg" alt="Image does not exist." id="weatherImg2">
+			<div class="tempDegree degrees">
+				<p id="weatherBlock2">68</p>
+				<span>&#176</span>
+			</div>
 		</div>
 		<hr class="bottomLine">
 		<div class="weatherBlock">
-			<p class="time">3:00 pm</p>
-			<img class="image" src="assets/fewclouds-day.svg" alt="Image does not exist.">
-			<p class="degrees">70&#176</p>
+			<p class="time" id="time3">3:00 pm</p>
+			<img class="image" src="assets/fewclouds-day.svg" alt="Image does not exist." id="weatherImg3">
+			<div class="tempDegree degrees">
+				<p id="weatherBlock3">70</p>
+				<span>&#176</span>
+			</div>
 		</div>
 		<hr class="bottomLine">
 		<div class="weatherBlock">
-			<p class="time">4:00 pm</p>
-			<img class="image" src="assets/clearsky.svg" alt="Image does not exist.">
-			<p class="degrees">70&#176</p>
+			<p class="time" id="time4">4:00 pm</p>
+			<img class="image" src="assets/clearsky.svg" alt="Image does not exist." id="weatherImg4">
+			<div class="tempDegree degrees">
+				<p id="weatherBlock4">70</p>
+				<span>&#176</span>
+			</div>
 		</div>
 		<hr class="bottomLine">
 		<div class="weatherBlock">
-			<p class="time">5:00 pm</p>
-			<img class="image" src="assets/clearsky.svg" alt="Image does not exist.">
-			<p class="degrees">71&#176</p>
+			<p class="time" id="time5">5:00 pm</p>
+			<img class="image" src="assets/clearsky.svg" alt="Image does not exist." id="weatherImg5">
+			<div class="tempDegree degrees">
+				<p id="weatherBlock5">71</p>
+				<span>&#176</span>
+			</div>
 		</div>      
 	</div>
 	<script src="weatherWeb.js"></script>

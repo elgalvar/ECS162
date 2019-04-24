@@ -275,13 +275,14 @@
 	.weatherImg {
 		position: relative;
 		bottom: 75px;
-		width: 225px;
-		height: 100%;
+		width: 150px;
+		height: 225px;
 		padding-left: 85px;
 	}
 
 	.timeTemp {
 		display: flex;
+		justify-content: space-between;
 		position: relative;
 		left: 55px;
 		bottom: 100px;
@@ -289,8 +290,6 @@
 
 	.currentContent {
 		font-size: 40px;
-		position: relative;
-		left: 45px;
 	}
 
 	.line {
@@ -304,8 +303,6 @@
 
 	.tempDegree {
 		display: flex;
-		position: relative;
-		right: 45px;
 	}
 
 	.temp {
@@ -376,6 +373,8 @@
 	}
 
 	.degrees {
+		position: relative;
+		left: 15px;
 		font-size: 70px;
 		padding-top: 25px;
 		padding-bottom: 0px;
@@ -480,7 +479,7 @@
 	.weatherImg {
 		padding-left: 55px;
 		width: 250px;
-		height: 100%;
+		height: 170px;
 		position: relative;
 		left: 90px;
 	}
@@ -531,6 +530,7 @@
 	}
 
 	#weatherBlocks {
+		background-image: linear-gradient(lightgray,white);
 		display: flex;
 		justify-content: center;
 	}
@@ -562,6 +562,9 @@
 	}
 
 	.degrees {
+		position: relative;
+		left: 20px;
+		text-align: center;
 		font-size: 80px;
 		padding-top: 20px;
 		padding-bottom: 0px;
