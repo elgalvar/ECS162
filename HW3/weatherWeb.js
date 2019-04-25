@@ -143,14 +143,15 @@ function changeImg(jsonObj) {
 
 		if (i == 0) {
 			time = (timeList[i].textContent).split("PM");
+			pmam = (timeList[i].textContent).replace(/\d+/g,'');
 			time = time[0];
-			pmam = 
 			console.log(time);
-			/*if () {
+			console.log(pmam);
+			if ((time >=6  && pmam === "PM") || (time < 6 && pmam === "AM")) {
 				nightTime(jsonObj, i, weatherImgs);
 			} else {
 				dayTime(jsonObj, i, weatherImgs);
-			}*/
+			}
 		} else {
 			time = (timeList[i].textContent);
 			time = time.split(" ");
