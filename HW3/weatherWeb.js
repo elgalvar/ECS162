@@ -1,4 +1,4 @@
-"strict mode";
+"use strict";
 
 function displayContent() {
 	let gradient = document.getElementById("gradient");
@@ -42,11 +42,11 @@ function makeCorsRequest() {
 	// Load some functions into response handlers.
 	xhr.onload = function() {
 		let responseStr = xhr.responseText;  // get the JSON string 
-		jsonObj = JSON.parse(responseStr);  // turn it into an object
+		let jsonObj = JSON.parse(responseStr);  // turn it into an object
 		//console.log(JSON.stringify(jsonObj, undefined, 2));  // print it out as a string, nicely formatted
-		changeTime();
-		changeTemp();
-		changeImg();
+		changeTime(jsonObj);
+		changeTemp(jsonObj);
+		changeImg(jsonObj);
 	};
 
 	xhr.onerror = function() {
@@ -57,7 +57,7 @@ function makeCorsRequest() {
 	xhr.send();
 }
 
-function changeTemp(){
+function changeTemp(jsonObj){
 	//let currentImg = document.getElementById("currentImg");
 	//let currentTime = document.getElementById("currentTime");
 	let weatherTemp = [];
@@ -75,7 +75,51 @@ function changeTemp(){
 	}
 }
 
-function changeImg() {
+function dayTime(jsonObj, i, weatherImgs) {
+	if (jsonObj.list[i].weather[0].description == "clear sky") {
+		weatherImgs[i].src="assets/clearsky.svg";
+	} else if (jsonObj.list[i].weather[0].description == "few clouds") {
+		weatherImgs[i].src="assets/fewclouds-day.svg";
+	} else if (jsonObj.list[i].weather[0].description == "broken clouds") {
+		weatherImgs[i].src="assets/brokencloud.svg";
+	} else if (jsonObj.list[i].weather[0].description == "scattered clouds") {
+		weatherImgs[i].src="assets/scatteredclouds.svg";
+	} else if (jsonObj.list[i].weather[0].description == "light rain") {
+		weatherImgs[i].src="assets/showerrain.svg";
+	} else if (jsonObj.list[i].weather[0].description == "rain") {
+		weatherImgs[i].src="assets/rain-day.svg";
+	} else if (jsonObj.list[i].weather[0].description == "thunderstorm") {
+		weatherImgs[i].src="assets/thunderstorms.svg";
+	} else if (jsonObj.list[i].weather[0].description == "snow") {
+		weatherImgs[i].src="assets/snow.svg";
+	} else if (jsonObj.list[i].weather[0].description == "mist") {
+		weatherImgs[i].src="assets/mist.svg";
+	}
+}
+
+function nightTime(jsonObj, i, weatherImgs) {
+	if (jsonObj.list[i].weather[0].description == "clear sky") {
+		weatherImgs[i].src="assets/clear-night.svg";
+	} else if (jsonObj.list[i].weather[0].description == "few clouds") {
+		weatherImgs[i].src="assets/fewclouds-night.svg";
+	} else if (jsonObj.list[i].weather[0].description == "broken clouds") {
+		weatherImgs[i].src="assets/brokencloud.svg";
+	} else if (jsonObj.list[i].weather[0].description == "scattered clouds") {
+		weatherImgs[i].src="assets/scatteredclouds.svg";
+	} else if (jsonObj.list[i].weather[0].description == "light rain") {
+		weatherImgs[i].src="assets/showerrain.svg";
+	} else if (jsonObj.list[i].weather[0].description == "rain") {
+		weatherImgs[i].src="assets/rain-night.svg";
+	} else if (jsonObj.list[i].weather[0].description == "thunderstorm") {
+		weatherImgs[i].src="assets/thunderstorms.svg";
+	} else if (jsonObj.list[i].weather[0].description == "snow") {
+		weatherImgs[i].src="assets/snow.svg";
+	} else if (jsonObj.list[i].weather[0].description == "mist") {
+		weatherImgs[i].src="assets/mist.svg";
+	}
+}
+
+function changeImg(jsonObj) {
 	let weatherImgs = [];
 	weatherImgs.push(document.getElementById("currentImg"));
 	weatherImgs.push(document.getElementById("weatherImg1"));
@@ -83,32 +127,7 @@ function changeImg() {
 	weatherImgs.push(document.getElementById("weatherImg3"));
 	weatherImgs.push(document.getElementById("weatherImg4"));
 	weatherImgs.push(document.getElementById("weatherImg5"));
-	
-	let i;
-	for(i = 0; i < 6; i++) {
-		if (jsonObj.list[i].weather[0].description == "clear sky") {
-			weatherImgs[i].src="assets/clearsky.svg";
-		} else if (jsonObj.list[i].weather[0].description == "few clouds") {
-			weatherImgs[i].src="assets/fewclouds-night.svg";
-		} else if (jsonObj.list[i].weather[0].description == "broken clouds") {
-			weatherImgs[i].src="assets/brokencloud.svg";
-		} else if (jsonObj.list[i].weather[0].description == "scattered clouds") {
-			weatherImgs[i].src="assets/scatteredclouds.svg";
-		} else if (jsonObj.list[i].weather[0].description == "light rain") {
-			weatherImgs[i].src="assets/showerrain.svg";
-		} else if (jsonObj.list[i].weather[0].description == "rain") {
-			weatherImgs[i].src="assets/rain-night.svg";
-		} else if (jsonObj.list[i].weather[0].description == "thunderstorm") {
-			weatherImgs[i].src="assets/thunderstorms.svg";
-		} else if (jsonObj.list[i].weather[0].description == "snow") {
-			weatherImgs[i].src="assets/snow.svg";
-		} else if (jsonObj.list[i].weather[0].description == "mist") {
-			weatherImgs[i].src="assets/mist.svg";
-		}
-	}
-}
 
-function changeTime () {
 	let timeList = [];
 	timeList.push(document.getElementById("currentTime"));
 	timeList.push(document.getElementById("time1"));
@@ -116,6 +135,47 @@ function changeTime () {
 	timeList.push(document.getElementById("time3"));
 	timeList.push(document.getElementById("time4"));
 	timeList.push(document.getElementById("time5"));
+	
+	let i;
+	let time;
+	let pmam;
+	for(i = 0; i < 6; i++) {
+
+		if (i == 0) {
+			time = (timeList[i].textContent).split("PM");
+			time = time[0];
+			pmam = 
+			console.log(time);
+			/*if () {
+				nightTime(jsonObj, i, weatherImgs);
+			} else {
+				dayTime(jsonObj, i, weatherImgs);
+			}*/
+		} else {
+			time = (timeList[i].textContent);
+			time = time.split(" ");
+			pmam = time[1];
+			time = time[0];
+			time = time.split(":");
+			time = time[0];
+			if ((time >=6  && pmam === "pm") || (time < 6 && pmam === "am")) {
+				nightTime(jsonObj, i, weatherImgs);
+			} else {
+				dayTime(jsonObj, i, weatherImgs);
+			}
+		}
+	}
+}
+
+function changeTime (jsonObj) {
+	let timeList = [];
+	timeList.push(document.getElementById("currentTime"));
+	timeList.push(document.getElementById("time1"));
+	timeList.push(document.getElementById("time2"));
+	timeList.push(document.getElementById("time3"));
+	timeList.push(document.getElementById("time4"));
+	timeList.push(document.getElementById("time5"));
+
 	let i;
 	for (i = 0; i < 6; i++) {
 		let time = jsonObj.list[i].dt_txt;
@@ -130,12 +190,19 @@ function changeTime () {
 		if(time < 0) {
 			time = time + 24;
 		}
-		if (time > 12) {
-			finalTime = String(time-12) + "pm";
+
+		if (i== 0 && time > 12) {
+			finalTime = String(time-12) + "PM";
+		} else if (i == 0 && time == 12) {
+			finalTime = String(time) + "PM";
+		} else if (i == 0) {
+			finalTime = String(time) + "AM";
+		} else if (time > 12) {
+			finalTime = String(time-12) + ":00 pm";
 		} else if (time == 12) {
-			finalTime = String(time) + "pm";
+			finalTime = String(time) + ":00 pm";
 		} else {
-			finalTime = String(time) + "am";
+			finalTime = String(time) + ":00 am";
 		}
 		//console.log(timeList[i]);
 		timeList[i].textContent = finalTime;
