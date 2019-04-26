@@ -1,5 +1,8 @@
 "use strict";
 
+let imageArray = []  // global variable to hold stack of images for animation 
+let count = 0;          // global var
+
 function displayContent() {
 	let gradient = document.getElementById("gradient");
 	let weatherBlocks = document.getElementById("weatherBlocks");
@@ -47,6 +50,11 @@ function makeCorsRequest() {
 		changeTime(jsonObj);
 		changeTemp(jsonObj);
 		changeImg(jsonObj);
+		let i;
+		for (i = 0; i < 6; i++) {
+			let unixtimestamp = jsonObj.list[i].dt*1000;
+			getTenImages(new Date(unixtimestamp));
+		}
 	};
 
 	xhr.onerror = function() {
@@ -145,8 +153,6 @@ function changeImg(jsonObj) {
 			time = (timeList[i].textContent).split("PM");
 			pmam = (timeList[i].textContent).replace(/\d+/g,'');
 			time = time[0];
-			console.log(time);
-			console.log(pmam);
 			if ((time >=6  && pmam === "PM") || (time < 6 && pmam === "AM")) {
 				nightTime(jsonObj, i, weatherImgs);
 			} else {
@@ -180,14 +186,12 @@ function changeTime (jsonObj) {
 	let i;
 	for (i = 0; i < 6; i++) {
 		let time = jsonObj.list[i].dt_txt;
-		//console.log(time);
 		let finalTime;
 		time = time.split(" ");
 		time = time[1];
 		time = time.split(":");
 		time = time[0];
 		time = time - 7;
-		//console.log(time);
 		if(time < 0) {
 			time = time + 24;
 		}
@@ -205,11 +209,68 @@ function changeTime (jsonObj) {
 		} else {
 			finalTime = String(time) + ":00 am";
 		}
-		//console.log(timeList[i]);
 		timeList[i].textContent = finalTime;
-		//console.log(finalTime);
 	}
+}
+
+function addToArray(newImage) {
+	if (count < 10) {
+		newImage.id = "doppler_"+count;
+		//console.log("newImage ID is "+newImage.id);
+		newImage.style.display = "none";
+		imageArray.push(newImage);
+		count = count+1;
+		if (count >= 10) {
+			console.log("Got 10 doppler images");
+			dopplerAnimation(imageArray);
+		}
+	}
+}
+
+
+function tryToGetImage(dateObj) {
+	let dateStr = dateObj.getUTCFullYear();
+	dateStr += String(dateObj.getUTCMonth() + 1).padStart(2, '0'); //January is 0!
+	dateStr += String(dateObj.getUTCDate()).padStart(2, '0');
+	let timeStr = String(dateObj.getUTCHours()).padStart(2,'0');
+	timeStr += String(dateObj.getUTCMinutes()).padStart(2,'0');
+	let filename = "DAX_"+dateStr+"_"+timeStr+"_N0R.gif";
+	let newImage = new Image();
+	newImage.onload = function () {
+		console.log("got image "+filename);
+		addToArray(newImage);
+	}
+	newImage.onerror = function() {
+		console.log("failed to load "+filename);
+	}
+	newImage.src = "http://radar.weather.gov/ridge/RadarImg/N0R/DAX/"+filename;
+}
+
+
+function getTenImages(dateObj) {
+	// if we try 150 images, and get one out of every 10, we should get enough
+	for (let i = 0; i < 150; i++) {
+		let newImage = tryToGetImage(dateObj);
+		dateObj.setMinutes( dateObj.getMinutes()-1 ); // back in time one minute
+	}
+
+}
+
+function dopplerAnimation(imageArray) {
+	let count = 0;
+	let timer = setInterval(function() {
+		let radarImg = document.getElementById("radarImg");
+		radarImg.display = "none";
+		radarImg.src = imageArray[count].src;
+		radarImg.display = "inline";
+		if(count < 9) {
+			count+=1;
+		} else {
+			count = 0;
+		}
+	}, 80);
 }
 
 // run this code to make request when this script file gets executed 
 makeCorsRequest();
+//dopplerAnimation();
