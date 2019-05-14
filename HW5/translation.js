@@ -7,9 +7,9 @@ function createCORSRequest(method, url) {
 }
 
 function makeCorsRequest() {
-	let word = document.getElementById("word");
-	word = word.value;
-	let url = "query?word="+word;
+	let phrase = document.getElementById("phrase");
+	phrase = phrase.value;
+	let url = "query?phrase="+phrase;
 
 	let xhr = createCORSRequest('GET', url);
 
@@ -22,10 +22,10 @@ function makeCorsRequest() {
 	// Load some functions into response handlers.
 	xhr.onload = function() {
 		let responseStr = xhr.responseText;  // get the JSON string 
-		let jsonObj = JSON.parse(responseStr);  // turn it into an objec
-		let palindrome = jsonObj.palindrome;
+		let jsonObj = JSON.parse(responseStr);  // turn it into an object
+		let translation = jsonObj.Spanish;
 		let outputGoesHere = document.getElementById("outputGoesHere");
-		outputGoesHere.textContent = palindrome;
+		outputGoesHere.textContent = translation;
 	};
 
 	xhr.onerror = function() {
@@ -37,7 +37,7 @@ function makeCorsRequest() {
 }
 
 function searchBar() {
-	let searchBar = document.getElementById("word");
+	let searchBar = document.getElementById("phrase");
 	searchBar.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
 			event.preventDefault();
