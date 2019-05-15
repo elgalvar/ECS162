@@ -10,6 +10,10 @@ const url = "https://translation.googleapis.com/language/translate/v2?key="+APIk
 const express = require('express');
 const port = 59168;
 
+// used for database
+const sqlite3 = require("sqlite3").verbose();  // use sqlite
+const fs = require("fs"); // file system
+
 function runAPIrequest(res, requestObject)
 {
 	// The call that makes a request to the API
@@ -74,6 +78,37 @@ function queryHandler(req, res, next)
 	}
 }
 
+function storeToDatabase(qObj) {
+	const dbFileName = "Flashcards.db";
+	// makes the object that represents the database in our code
+	const db = new sqlite3.Database(dbFileName);  // object, not database.
+	
+	const cmdStr = 'INSERT INTO Flashcards (userId, english, spanish, seen, correct)  VALUES (?,?,?,?,?)';
+	let params = ['1', qObj.english, qObj.spanish, '0', '0'];
+	db.run(cmdStr, params, tableCreationCallback);
+
+	function tableCreationCallback(err) {
+		if (err) {
+			console.log("Table insert error",err);
+		} else {
+			console.log("Data added");
+			db.close();
+		}
+	}
+
+}
+
+function storeFlashcard(req, res, next) {
+	let qObj = req.query;
+
+	if (qObj.english != undefined && qObj.spanish != undefined) {
+		storeToDatabase(qObj);
+		res.json({"English": qObj.english, "Spanish": qObj.spanish});
+	} else {
+		next();
+	}
+}
+
 function fileNotFound(req, res)
 {
 	let url = req.url;
@@ -85,6 +120,7 @@ function fileNotFound(req, res)
 const app = express();
 app.use(express.static('public')); // check if there is a static file
 app.get('/query', queryHandler); // check if query is valid
+app.use('/store', storeFlashcard);
 app.use(fileNotFound);
 
 app.listen(port, function(){console.log('Listening...');});
