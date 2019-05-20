@@ -1,0 +1,97 @@
+body {
+	font-family: helvetica, sans-serif;
+}
+
+main.container {
+	height: 851px;
+}
+
+div.navContent {
+	/*background-color: orange;*/
+	padding: 3%;
+}
+
+div.topNav {
+	display: flex;
+	/*background-color: lightblue;*/
+	justify-content: space-between;
+	width: 60%;
+}
+
+button.review {
+	background-color: #606B9B;
+	color: white;
+	border: none;
+	border-radius: 15px;
+	height: 60px;
+	width: 220px;
+	font-size: 25px;
+}
+
+p.title {
+	color: #606B9B;
+	font-size: 70px;
+	font-family: Raleway;
+	font-weight: 700;
+}
+
+div.flashcards {
+	/*background-color: lightgray;*/
+	height: 60%;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+input.textBox {
+	height: 420px;
+	width: 500px;
+	position: relative;
+	top: 25px;
+	resize: none;
+	text-align: center;
+	font-size: 30px;
+	border-style: solid;
+	border-width: medium;
+	border-color: lightgrey;
+}
+
+input#inputCard {
+	position: relative;
+	left: 50px;
+}
+
+input#outputCard {
+	position: relative;
+	right: 50px;
+}
+
+div.save {
+	/*background-color: pink;*/
+	display: flex;
+	justify-content: flex-end;
+	height: 14%
+}
+
+button#saveButton {
+	background-color: #70C7A9;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        height: 65px;
+        width: 170px;
+        font-size: 25px;
+	position: relative;
+	right: 160px;
+}
+
+div.userContainer {
+	background-color: #606B9B;
+	height: 7.2%;
+}
+
+p.username {
+	color: white;
+	padding-top: 17px;
+	text-align: center;
+	font-size: 25px;
+}

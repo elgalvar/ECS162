@@ -83,9 +83,8 @@ function storeToDatabase(qObj) {
 	// makes the object that represents the database in our code
 	const db = new sqlite3.Database(dbFileName);  // object, not database.
 	
-	const cmdStr = 'INSERT INTO Flashcards (userId, english, spanish, seen, correct)  VALUES (?,?,?,?,?)';
-	let params = ['1', qObj.english, qObj.spanish, '0', '0'];
-	db.run(cmdStr, params, tableCreationCallback);
+	const cmdStr = 'INSERT INTO Flashcards (userId, english, spanish, seen, correct)  VALUES (1,@0,@1,0,0)';
+	db.run(cmdStr, qObj.english, qObj.spanish, tableCreationCallback);
 
 	function tableCreationCallback(err) {
 		if (err) {

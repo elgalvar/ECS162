@@ -7,8 +7,8 @@ function createCORSRequest(method, url) {
 }
 
 function translationCorsRequest() {
-	let phrase = document.getElementById("phrase");
-	phrase = phrase.value;
+	let inputCard = document.getElementById("inputCard");
+	let phrase = inputCard.value;
 	let url = "query?phrase="+phrase;
 
 	let xhr = createCORSRequest('GET', url);
@@ -24,8 +24,8 @@ function translationCorsRequest() {
 		let responseStr = xhr.responseText;  // get the JSON string 
 		let jsonObj = JSON.parse(responseStr);  // turn it into an object
 		let translation = jsonObj.Spanish;
-		let outputGoesHere = document.getElementById("outputGoesHere");
-		outputGoesHere.textContent = translation;
+		let outputCard = document.getElementById("outputCard");
+		outputCard.value = translation;
 	};
 
 	xhr.onerror = function() {
@@ -37,10 +37,10 @@ function translationCorsRequest() {
 }
 
 function storeCorsRequest() {
-	let phrase = document.getElementById("phrase");
-	let output = document.getElementById("outputGoesHere");
-	output = output.textContent;
-	phrase = phrase.value;
+	let inputCard = document.getElementById("inputCard");
+	let outputCard = document.getElementById("outputCard");
+	let output = outputCard.value;
+	let phrase = inputCard.value;
 	let url = "store?english=" + phrase + "&spanish=" + output;
 
 	let xhr = createCORSRequest('GET', url);
@@ -73,5 +73,3 @@ function searchBar() {
 		}
 	});
 }
-
-searchBar();
