@@ -183,12 +183,14 @@
 
 	div.userContainer {
 		background-color: #606B9B;
-		height: 7.2%;
+		position: absolute;
+		width: 100%;
+		bottom: 0;
 	}
 
 	p.username {
 		color: white;
-		padding-top: 17px;
+		padding: 18px;
 		text-align: center;
 		font-size: 25px;
 	}
@@ -200,17 +202,17 @@
 	}
 
 	main.container {
-		height: 851px;
+		
 	}
 
 	div.navContent {
-		/*background-color: orange;*/
+		background-color: orange;
 		padding: 3%;
 	}
 
 	div.topNav {
 		display: flex;
-		/*background-color: lightblue;*/
+		background-color: lightblue;
 		justify-content: space-between;
 		width: 60%;
 	}
@@ -233,7 +235,7 @@
 	}
 
 	div.flashcards {
-		/*background-color: lightgray;*/
+		background-color: lightgray;
 		height: 60%;
 		display: flex;
 		justify-content: space-evenly;
@@ -263,7 +265,7 @@
 	}
 
 	div.save {
-		/*background-color: pink;*/
+		background-color: pink;
 		display: flex;
 		justify-content: flex-end;
 		height: 14%;
@@ -283,12 +285,14 @@
 
 	div.userContainer {
 		background-color: #606B9B;
-		height: 7.2%;
+		position: absolute;
+		width: 100%;
+		bottom: 0;
 	}
 
 	p.username {
 		color: white;
-		padding-top: 17px;
+		padding: 17px;
 		text-align: center;
 		font-size: 25px;
 	}
