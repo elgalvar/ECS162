@@ -72,6 +72,14 @@ function translate() {
 }
 
 function save() {
-	storeCorsRequest();
+	var input = document.getElementById("inputCard");
+	var output = document.getElementById("outputCard");
+	input = input.value;
+	output = output.value;
+	if (input != "" && output != "") {
+		storeCorsRequest();
+	} else {
+		alert("Cannot save!");
+	}
 }
 

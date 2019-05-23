@@ -51,5 +51,13 @@ function translate() {
 }
 
 function save() {
-	storeCorsRequest();
+	let input = document.getElementById("inputCard");
+	let output = document.getElementById("outputCard");
+	input = input.value;
+	output = output.value;
+	if(input != "" && output != "") {
+		storeCorsRequest();
+	} else {
+		alert("Cannot save!");
+	}
 }
