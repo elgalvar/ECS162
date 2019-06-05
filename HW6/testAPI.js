@@ -17,6 +17,11 @@ const port = 59168;
 const sqlite3 = require("sqlite3").verbose();  // use sqlite
 const fs = require("fs"); // file system
 
+const dbFileName = "Flashcards.db";
+// makes the object that represents the database in our code
+const db = new sqlite3.Database(dbFileName);  // object, not database.
+
+
 const googleLoginData = {
 	clientID: '619212366204-dfhq3ifleuk514123kudv8tr39ggao5r.apps.googleusercontent.com',
 	clientSecret: 'QX8ay2Zeqq6HMgKhtAV5kJC7',
@@ -91,30 +96,29 @@ function queryHandler(req, res, next)
 	}
 }
 
-function storeToDatabase(qObj) {
-	const dbFileName = "Flashcards.db";
+function storeToDatabase(qObj, user) {
+	//const dbFileName = "Flashcards.db";
 	// makes the object that represents the database in our code
-	const db = new sqlite3.Database(dbFileName);  // object, not database.
+	//const db = new sqlite3.Database(dbFileName);  // object, not database.
 	
-	const cmdStr = 'INSERT INTO Flashcards (userId, english, spanish, seen, correct)  VALUES (1,@0,@1,0,0)';
-	db.run(cmdStr, qObj.english, qObj.spanish, tableCreationCallback);
+	const cmdStr = 'INSERT INTO Flashcards (userId, english, spanish, seen, correct)  VALUES (@userId,@english,@spanish,0,0)';
+	db.run(cmdStr, user.userId, qObj.english, qObj.spanish, tableCreationCallback);
+}
 
-	function tableCreationCallback(err) {
-		if (err) {
-			console.log("Table insert error",err);
-		} else {
-			console.log("Data added");
-			db.close();
-		}
+function tableCreationCallback(err) {
+	if (err) {
+		console.log("Table insert error",err);
+	} else {
+		console.log("Data added");
+		//db.close();
 	}
-
 }
 
 function storeFlashcard(req, res, next) {
 	let qObj = req.query;
 
 	if (qObj.english != undefined && qObj.spanish != undefined) {
-		storeToDatabase(qObj);
+		storeToDatabase(qObj,req.user);
 		res.json({"English": qObj.english, "Spanish": qObj.spanish});
 	} else {
 		next();
@@ -147,6 +151,11 @@ function startReview(req, res, next) {
 	res.redirect('/review.html');
 }
 
+function getUsername(req, res, next) {
+	let userData = req.user;
+	res.json(userData);
+}
+
 const app = express();
 
 // pipeline stage that just echos url, for debugging
@@ -171,23 +180,36 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }) 
 // Google redirects here after user successfully logs in
 // This route has three handler functions, one run after the other. 
 app.get('/auth/redirect',
-        // for educational purposes
-        function (req, res, next) {
-            console.log("at auth/redirect");
-            next();
-        },
-        // This will issue Server's own HTTPS request to Google
-        // to access the user's profile information with the 
-        // temporary key we got in the request. 
-        passport.authenticate('google'),
-        // then it will run the "gotProfile" callback function,
-        // set up the cookie, call serialize, whose "done" 
-        // will come back here to send back the response
-        // ...with a cookie in it for the Browser! 
-        function (req, res) {
-            console.log('Logged in and using cookies!')
-            res.redirect('/user/lango.html');
-        });
+	// for educational purposes
+	function (req, res, next) {
+		console.log("at auth/redirect");
+		next();
+	},
+	// This will issue Server's own HTTPS request to Google
+	// to access the user's profile information with the 
+	// temporary key we got in the request. 
+	passport.authenticate('google'),
+	// then it will run the "gotProfile" callback function,
+	// set up the cookie, call serialize, whose "done" 
+	// will come back here to send back the response
+	// ...with a cookie in it for the Browser! 
+	function (req, res) {
+		console.log('Logged in and using cookies!');
+		const cmdStr = 'SELECT userId FROM Flashcards WHERE userId = ?';
+
+		db.get(cmdStr,req.user, function(err,row) {
+			if (err) {
+				console.error(err.message);
+			}
+			if (row === undefined) {
+				console.log("LANGO: " + req.user);
+				res.redirect('/user/lango.html');
+			} else {
+				console.log("REVIEW: " + row);
+				res.redirect('/user/review.html');
+			}
+		});
+	});
 
 // static files in /user are only available after login
 app.get('/user/*',
@@ -200,6 +222,7 @@ app.get('/user/*',
 app.use(express.static('public')); // check if there is a static file
 app.get('/user/query', queryHandler); // check if query is valid
 app.get('/user/store', storeFlashcard);
+app.get('/user/username', getUsername);
 app.use(fileNotFound);
 
 app.listen(port, function(){console.log('Listening...');});
@@ -225,13 +248,27 @@ function gotProfile(accessToken, refreshToken, profile, done) {
 	// and to store him in DB if not already there. 
 	// Second arg to "done" will be passed into serializeUser,
 	// should be key to get user out of database.
+	let dbRowId = profile.id;
+	const cmdStr1 = 'SELECT userId FROM Userprofile WHERE userId = ?';
 
-	let dbRowID = 1;  // temporary! Should be the real unique
+	db.get(cmdStr1,dbRowId, function(err,row) {
+		//console.log("ROW: "+row);
+		if (err) {
+			console.error(err.message);
+		}
+		if (row === undefined) {
+			console.log("ITS UNDEFINED");
+			const cmdStr2 = 'INSERT INTO Userprofile (firstName, lastName, userId)  VALUES (@firstName,@lastName,@userId)';
+			db.run(cmdStr2, profile.name.givenName, profile.name.familyName, dbRowId, tableCreationCallback);
+		}
+	});
+
+	dbRowId = profile.id;  // temporary! Should be the real unique
 	// key for db Row for this user in DB table.
 	// Note: cannot be zero, has to be something that evaluates to
 	// True.  
 
-	done(null, dbRowID);
+	done(null, dbRowId);
 }
 
 // Part of Server's sesssion set-up.  
@@ -247,12 +284,26 @@ passport.serializeUser((dbRowID, done) => {
 // Where we should lookup user database info. 
 // Whatever we pass in the "done" callback becomes req.user
 // and can be used by subsequent middleware.
-passport.deserializeUser((dbRowID, done) => {
-	console.log("deserializeUser. Input is:", dbRowID);
+passport.deserializeUser((dbRowId, done) => {
+	console.log("deserializeUser. Input is:", dbRowId);
 	// here is a good place to look up user data in database using
 	// dbRowID. Put whatever you want into an object. It ends up
-	// as the property "user" of the "req" object. 
-	let userData = {userData: "data from db row goes here"};
-	done(null, userData);
+	// as the property "user" of the "req" object.
+
+	const cmdStr = 'SELECT firstName, lastName FROM Userprofile WHERE userId = ?';
+	let userData;
+
+	db.get(cmdStr,dbRowId, function(err,row) {
+		//console.log("ROW: "+row);
+		if (err) {
+			console.error(err.message);
+		}
+		if (row === undefined) {
+			userData = {"userId": dbRowId};
+		} else {
+			userData = {"firstName":row.firstName, "lastName": row.lastName, "userId": dbRowId};
+		}
+		done(null, userData);
+	});
 });
 

@@ -10,8 +10,10 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 // Initialize table.
 // If the table already exists, causes an error.
 // Fix the error by removing or renaming Flashcards.db
-const cmdStr = 'CREATE TABLE Flashcards (userId INT, english TEXT, spanish TEXT, seen INT, correct INT)';
+const cmdStr = 'CREATE TABLE Flashcards (userId TEXT, english TEXT, spanish TEXT, seen INT, correct INT)';
 db.run(cmdStr,tableCreationCallback);
+const cmdStr2 = 'CREATE TABLE Userprofile (firstName TEXT, lastName TEXT, userId TEXT)';
+db.run(cmdStr2,tableCreationCallback);
 
 // Always use the callback for database operations and print out any
 // error messages you get.
@@ -21,6 +23,6 @@ function tableCreationCallback(err) {
 		console.log("Table creation error",err);
 	} else {
 		console.log("Database created");
-		db.close();
 	}
 }
+db.close();
