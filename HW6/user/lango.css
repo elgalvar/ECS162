@@ -82,7 +82,7 @@
 		bottom: 0px;
 	}
 
-	p.username {
+	p#username {
 		color: white;
 		padding: 17px;
 		text-align: center;
@@ -169,7 +169,7 @@
 		bottom: 0;
 	}
 
-	p.username {
+	p#username {
 		color: white;
 		padding: 18px;
 		text-align: center;
@@ -265,7 +265,7 @@
 		bottom: 0;
 	}
 
-	p.username {
+	p#username {
 		color: white;
 		padding: 17px;
 		text-align: center;

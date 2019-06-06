@@ -37,11 +37,7 @@ function Username() {
 	return React.createElement(
 		"div",
 		{ className: "userContainer" },
-		React.createElement(
-			"p",
-			{ className: "username" },
-			"UserName"
-		)
+		React.createElement("p", { id: "username" })
 	);
 }
 
@@ -86,4 +82,39 @@ function save() {
 		alert("Cannot save!");
 	}
 }
+
+function createCORSRequest(method, url) {
+	var xhr = new XMLHttpRequest();
+	xhr.open(method, url, true); // call its open method
+	return xhr;
+}
+
+function getUsernameCorsRequest() {
+	var username = document.getElementById("username");
+	var url = "username";
+
+	var xhr = createCORSRequest('GET', url);
+
+	// checking if browser does CORS
+	if (!xhr) {
+		alert('CORS not supported');
+		return;
+	}
+
+	// Load some functions into response handlers.
+	xhr.onload = function () {
+		var responseStr = xhr.responseText; // get the JSON string 
+		var jsonObj = JSON.parse(responseStr); // turn it into an object
+		var usernameString = jsonObj.firstName + " " + jsonObj.lastName;
+		username.textContent = usernameString;
+	};
+
+	xhr.onerror = function () {
+		alert('Woops, there was an error making the request.');
+	};
+
+	// Actually send request to server
+	xhr.send();
+}
+getUsernameCorsRequest();
 

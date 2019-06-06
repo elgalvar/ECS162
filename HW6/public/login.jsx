@@ -11,7 +11,13 @@ function Gradient() {
 
 function Login() {
 	return(<div className="login">
-			<a href="auth/google">Login with Google</a>
+			<button id="loginButton"
+			onClick={function() {
+				window.location.assign('/auth/google');
+			}}>
+			<img className="googleImg" src="/assets/google.jpg"/>
+			<span className="loginText">Login with Google</span>
+			</button>
 		</div>
 	);
 }

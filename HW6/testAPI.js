@@ -156,6 +156,23 @@ function getUsername(req, res, next) {
 	res.json(userData);
 }
 
+function getFlashcard(req, res, next) {
+	let userData = req.user;
+	let randomChoice = 0;
+	let cmdStr = 'SELECT english, spanish, seen FROM Flashcards WHERE userId = ?';
+	db.all(cmdStr, userData.userId, function(err,row) {
+		if (err) {
+			console.error(err.message);
+		}
+		console.log("ROW: "+JSON.stringify(row));
+		console.log("number of item in row is "+row.length);
+		randomChoice = Math.floor(Math.random()*row.length);
+		cmdStr = 'UPDATE Flashcards SET seen = ? WHERE english = ?';
+		db.run(cmdStr, row[randomChoice].seen+1, row[randomChoice].english);
+		res.json({"english": row[randomChoice].english, "spanish": row[randomChoice].spanish});
+	});
+}
+
 const app = express();
 
 // pipeline stage that just echos url, for debugging
@@ -223,6 +240,7 @@ app.use(express.static('public')); // check if there is a static file
 app.get('/user/query', queryHandler); // check if query is valid
 app.get('/user/store', storeFlashcard);
 app.get('/user/username', getUsername);
+app.get('/user/flashcard', getFlashcard);
 app.use(fileNotFound);
 
 app.listen(port, function(){console.log('Listening...');});

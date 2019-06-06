@@ -1,3 +1,7 @@
+.disappear {
+	display: none;
+}
+
 @media (max-width: 460px) {
 	body {
 		font-family: helvetica, sans-serif;
@@ -39,28 +43,81 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		align-items: center;
+		perspective: 1350px;
 	}
 
 	div#flipCard {
-		display: flex;
-		justify-content: flex-end;
-	}
+                display: flex;
+                justify-content: flex-end;
+                transform-style: preserve-3d;
+                transition: all .7s linear;
+                height: 280px;
+                width: 300px;
+        }
 
-	img#flipButton {
-		height: 50px;
-		width: 50px;
-		position: absolute;
-	}
+	div#correct {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform-style: preserve-3d;
+                transition: all .7s linear;
+                height: 280px;
+                width: 300px;
+        }
 
-	input#inputCard {
-		height: 280px;
-		width: 300px;
-		resize: none;
-		text-align: center;
-		font-size: 30px;
-		border-style: solid;
-		border-width: medium;
-		border-color: lightgrey;
+
+        img#flipButton {
+                height: 50px;
+                width: 50px;
+                position: absolute;
+        }
+
+        input#frontCard {
+                height: 100%;
+                width: 100%;
+                resize: none;
+                text-align: center;
+                font-size: 30px;
+                border-style: solid;
+                border-width: medium;
+                border-color: lightgrey;
+                backface-visibility: hidden;
+        }
+
+        input#backCard {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                resize: none;
+                text-align: center;
+                font-size: 30px;
+                border-style: solid;
+                border-width: medium;
+                border-color: lightgrey;
+                backface-visibility: hidden;
+                transform: rotateY(180deg);
+        }
+
+	input#correctCard {
+                background-color: lightgreen;
+                position: absolute;
+                height: 50%;
+                width: 75%;
+                text-align: center;
+                border-style: solid;
+                border-width: medium;
+                border-color: green;
+                font-size: 30px;
+                color: green;
+                backface-visibility: hidden;
+                transform: rotateY(180deg);
+        }
+
+
+	.rotate {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
 	}
 
 	input#outputCard {
@@ -99,7 +156,7 @@
 		bottom: 0px;
 	}
 
-	p.username {
+	p#username {
 		color: white;
 		padding: 17px;
 		text-align: center;
@@ -149,29 +206,81 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		align-items: center;
-
+		perspective: 1350px;
 	}
 
 	div#flipCard {
-		display: flex;
-		justify-content: flex-end;
-	}
+                display: flex;
+                justify-content: flex-end;
+                transform-style: preserve-3d;
+                transition: all .7s linear;
+                height: 300px;
+                width: 600px;
+        }
 
-	img#flipButton {
-		height: 50px;
-		width: 50px;
-		position: absolute;
-	}
+	div#correct {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform-style: preserve-3d;
+                transition: all .7s linear;
+                height: 300px;
+                width: 600px;
+        }
 
-	input#inputCard {
-		height: 300px;
-		width: 600px;
-		resize: none;
-		text-align: center;
-		font-size: 30px;
-		border-style: solid;
-		border-width: medium;
-		border-color: lightgrey;
+
+        img#flipButton {
+                height: 50px;
+                width: 50px;
+                position: absolute;
+        }
+
+        input#frontCard {
+                height: 100%;
+                width: 100%;
+                resize: none;
+                text-align: center;
+                font-size: 30px;
+                border-style: solid;
+                border-width: medium;
+                border-color: lightgrey;
+                backface-visibility: hidden;
+        }
+
+        input#backCard {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                resize: none;
+                text-align: center;
+                font-size: 30px;
+                border-style: solid;
+                border-width: medium;
+                border-color: lightgrey;
+                backface-visibility: hidden;
+                transform: rotateY(180deg);
+        }
+
+	input#correctCard {
+                background-color: lightgreen;
+                position: absolute;
+                height: 50%;
+                width: 50%;
+                text-align: center;
+                border-style: solid;
+                border-width: medium;
+                border-color: green;
+                font-size: 30px;
+                color: green;
+                backface-visibility: hidden;
+                transform: rotateY(180deg);
+        }
+
+
+	.rotate {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
 	}
 
 	input#outputCard {
@@ -210,7 +319,7 @@
 		bottom: 0;
 	}
 
-	p.username {
+	p#username {
 		color: white;
 		padding: 18px;
 		text-align: center;
@@ -259,12 +368,28 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		align-items: center;
+		perspective: 1350px;
 	}
 
 
 	div#flipCard {
 		display: flex;
 		justify-content: flex-end;
+		transform-style: preserve-3d;
+		transition: all .7s linear;
+		height: 300px;
+		width: 850px;
+	}
+
+	div#correct {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		transform-style: preserve-3d;
+		transition: all .7s linear;
+		height: 300px;
+		width: 850px;
 	}
 
 	img#flipButton {
@@ -273,15 +398,50 @@
 		position: absolute;
 	}
 
-	input#inputCard {
-		height: 300px;
-		width: 850px;
+	input#frontCard {
+		height: 100%;
+		width: 100%;
 		resize: none;
 		text-align: center;
 		font-size: 30px;
 		border-style: solid;
 		border-width: medium;
 		border-color: lightgrey;
+		backface-visibility: hidden;
+	}
+
+	input#backCard {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		resize: none;
+		text-align: center;
+		font-size: 30px;
+		border-style: solid;
+		border-width: medium;
+		border-color: lightgrey;
+		backface-visibility: hidden;
+		transform: rotateY(180deg);
+	}
+
+	input#correctCard {
+		background-color: lightgreen;
+		position: absolute;
+		height: 50%;
+		width: 50%;
+		text-align: center;
+		border-style: solid;
+		border-width: medium;
+		border-color: green;
+		font-size: 30px;
+		color: green;
+		backface-visibility: hidden;
+		transform: rotateY(180deg);
+	}
+
+	.rotate {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
 	}
 
 	input#outputCard {
@@ -320,7 +480,7 @@
 		bottom: 0;
 	}
 
-	p.username {
+	p#username {
 		color: white;
 		padding: 17px;
 		text-align: center;

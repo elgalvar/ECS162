@@ -27,9 +27,17 @@ function Login() {
 		"div",
 		{ className: "login" },
 		React.createElement(
-			"a",
-			{ href: "auth/google" },
-			"Login with Google"
+			"button",
+			{ id: "loginButton",
+				onClick: function onClick() {
+					window.location.assign('/auth/google');
+				} },
+			React.createElement("img", { className: "googleImg", src: "/assets/google.jpg" }),
+			React.createElement(
+				"span",
+				{ className: "loginText" },
+				"Login with Google"
+			)
 		)
 	);
 }
